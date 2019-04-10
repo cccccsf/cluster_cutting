@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import components
-from cluster_cutting import ClusterCutter
+from components import ClusterCutter
 
 
 def cluster_cutting():

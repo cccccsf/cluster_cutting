@@ -5,3 +5,5 @@ from components.periodict_table import periodic_table_rev
 from components.atom import Atom
 from components.covalent_radii import read_cov_rad
 from components.point import Point
+from components.cluster_cutting import ClusterCutter
+from components.factor_calculation import FactorCalculator

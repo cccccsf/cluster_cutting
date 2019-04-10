@@ -40,6 +40,7 @@ class ClusterCutter(object):
         self.cutting_factors = factors
         self.deleted_atoms = deleted_atoms
         self.cutting_setting = cutting_setting
+        self.record_parameters()
         
         self.choosed_atoms = []
         
@@ -260,6 +261,18 @@ class ClusterCutter(object):
         l0 = math.sqrt(l0)
         l = max(l, l0)
         return l, l1, l2, l3
+    
+    def record_parameters(self):
+        try:
+            self.record_data('central atoms', self.central_atoms)
+            self.record_data('deleted atoms', self.deleted_atoms)
+            self.record_data('center', self.centre)
+            self.record_data('upper center', self.UpperCenter)
+            self.record_data('under center', self.UnderCenter)
+            self.record_data('cell size', [self.l, self.l1, self.l2, self.l3])
+            self.record_data('cutting factors', self.cutting_factors)
+        except Exception as e:
+            print(e)
     
     @staticmethod
     def cal_distance(atom, centre):
@@ -622,7 +635,29 @@ class ClusterCutter(object):
         self.choosed_atoms = self.delete_atoms(self.choosed_atoms)
         if add_h == True:
             self.choosed_atoms = self.add_H()
-        
+        self.record_cluster()
+
+    def record_cluster(self):
+        with open(self.record_file, 'r') as f:
+            data = json.load(f)
+        geo_list = []
+        for atom in self.choosed_atoms:
+            atom_dict = {}
+            atom_dict['no'] = atom.no
+            atom_dict['nat'] = atom.nat
+            atom_dict['ele'] = atom.element
+            atom_dict['x'] = atom.x
+            atom_dict['y'] = atom.y
+            atom_dict['z'] = atom.z
+            atom_dict['coordinate number'] = atom.coor
+            atom_dict['coordinate vector'] = atom.coor_vec
+            atom_dict['layer'] = atom.layer
+            atom_dict['type'] = atom.type
+            geo_list.append(atom_dict)
+        data['cluster'] = geo_list
+        with open(self.record_file, 'w') as f:
+            json.dump(data, f, indent=4)
+
     def write_xyz(self, cluster=[]):
         """
         wriete the cutted cluster into a .xyz format file
