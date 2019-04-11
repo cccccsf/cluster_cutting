@@ -7,3 +7,5 @@ from components.covalent_radii import read_cov_rad
 from components.point import Point
 from components.cluster_cutting import ClusterCutter
 from components.factor_calculation import FactorCalculator
+from components.read_info_from_ini_file import GeoIniReader
+from components.read_info_from_CRYSTAL_INPUT import read_CrystalInput

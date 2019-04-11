@@ -1,12 +1,16 @@
 #!/usr/bin/python3
 import os
+import sys
 import json
 import math
 from components import Atom
-from components import read_info
-from components import read_cov_rad
 from components import Point
+from components import read_info
+from components import GeoIniReader
+from components import read_CrystalInput
+from components import read_cov_rad
 from components import periodic_table_rev
+
 
 
 class ClusterCutter(object):
@@ -87,7 +91,23 @@ class ClusterCutter(object):
         read dimensionality, lattice vector and geometry infomation from different input
         :return: dimensionality, lattice vector and geometry
         """
-        dimensionality, lattice_vector, geometry = read_info(self.geometry_file)
+        try:
+            # try to find infos in CRYSTAL geometry optimization OUTPUT file.
+            dimensionality, lattice_vector, geometry = read_info(self.geometry_file)
+        except:
+            try:
+                # try to find infos in .ini file
+                IniReader = GeoIniReader(self.geometry_file)
+                dimensionality, lattice_vector, geometry = IniReader.get_infos()
+            except:
+                try:
+                    # try to find infos in CRYSTAL INPUT file
+                    dimensionality, lattice_vector, geometry = read_CrystalInput(self.geometry_file)
+                except Exception as e:
+                    print(e)
+                    print('Please use correct form of geometry input.')
+                    print('Programm exits...')
+                    sys.exit()
         self.record_data('dimensionality', dimensionality)
         self.record_data('lattice vector', lattice_vector)
         self.record_geometry(geometry)

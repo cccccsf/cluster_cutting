@@ -14,7 +14,6 @@ build
 
 # My configurations:
 .idea/
-test/
 *.pyc
 *.cpython-36.pyc
 */__pycache__/*
