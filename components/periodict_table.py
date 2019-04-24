@@ -38,8 +38,10 @@ for key, value in periodic_table.items():
         metal[key] = periodic_table[key]
 '''
 
+
 def dict_reverse(dic):
     return dict([(v, k) for k, v in dic.items()])
+
 
 periodic_table_rev = dict_reverse(periodic_table)
 non_metal_rev = dict_reverse(non_metal)

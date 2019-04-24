@@ -23,14 +23,14 @@ def cluster_cutting():
         name=name,
         central_atoms=central_atoms,
         fixed_atoms=fixed_atoms,
-        cutting_setting=cutting_setting)
+        cutting_setting=cutting_setting,
+        deleted_atoms=deleted_atoms)
     Clu.get_cluster()
     
-    if out_layer_number == True:
+    if out_layer_number is True:
         Clu.write_xyz_with_layernumber()
     else:
         Clu.write_xyz()
-
 
 
 if __name__ == "__main__":

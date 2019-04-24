@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-import os
 import math
 from components import periodic_table_rev
-from components import Point
 
 
 def read_CrystalInput(file, transfer_fraction=False):
@@ -16,15 +14,13 @@ def read_CrystalInput(file, transfer_fraction=False):
             break
         point += 1
     lines = lines[:point]
-    name = lines[0]
     type = lines[1]
-    group = lines[2]
     lattice_para = lines[3].split()
     lattice_para = find_len_and_ang(lattice_para)
     number = int(lines[4])
     geometry = lines[5:5+number]
     geometry = transfer_GeoForm(geometry)
-    if transfer_fraction == True:
+    if transfer_fraction is True:
         geometry = geo_transfer_from_fraction_to_angstrom(geometry, lattice_para)
     lattice_vec = transfer_LatticePara_to_LatticeVec(lattice_para, geometry)
     dimen = get_dimentionality(type)
@@ -56,7 +52,6 @@ def transfer_GeoForm(geometry):
 
 def find_len_and_ang(LatticePara):
     LatticePara = [float(para) for para in LatticePara]
-    length, angle = [], []
     if len(LatticePara) == 6:
         length = LatticePara[:3]
         angle = LatticePara[3:]
@@ -116,7 +111,7 @@ def get_eckes(geometry):
     p7 = (x_min, y_max, z_max)
     p8 = (x_max, z_max, z_max)
     eckes = [p1, p2, p3, p4, p5, p6, p7, p8]
-    return  eckes
+    return eckes
 
 
 def cal_dis(p1, p2):

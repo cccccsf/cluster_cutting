@@ -9,20 +9,19 @@ def cluster_cutting(atom):
     fixed_atoms = Ini.read_fixed_atoms()
     central_atoms = Ini.read_central_atoms_info()
     cutting_factors = Ini.read_factors()
-    deleted_atoms = Ini.read_deleted_atoms()
-    out_layer_number = Ini.if_out_with_layer_number()
     cutting_setting = Ini.get_cutting_setting()
 
     FacCal = components.FactorCalculator(
         atom,
         path,
         output_file,
-        factors = cutting_factors,
+        factors=cutting_factors,
         name=name,
         central_atoms=central_atoms,
         fixed_atoms=fixed_atoms,
-        cutting_setting=cutting_setting)
-    #FacCal.get_cluster()
+        cutting_setting=cutting_setting,
+        )
+    # FacCal.get_cluster()
 
     print('***'*30)
     print(atom)
@@ -49,12 +48,11 @@ def cluster_cutting(atom):
 
 if __name__ == "__main__":
 
-    # please write down the atom infomation here
+    # please write down the atom information here
     element = 15
     x = 0
     y = 0
     z = 0
-
 
     atom = components.Atom(element, x, y, z)
     cluster_cutting(atom)

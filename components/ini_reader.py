@@ -25,7 +25,6 @@ class IniReader(object):
         self.add_h = False
         self.out_layer_number = True
 
-
     def set_default_path(self):
         if self.ini_path == '':
             self.ini_path = os.path.dirname(

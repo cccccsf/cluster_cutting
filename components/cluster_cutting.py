@@ -12,7 +12,6 @@ from components import read_cov_rad
 from components import periodic_table_rev
 
 
-
 class ClusterCutter(object):
 
     def __init__(
@@ -49,9 +48,9 @@ class ClusterCutter(object):
         self.choosed_atoms = []
         
     def __setitem__(self, key, value):
-        self._item[index] = value
+        self._item[key] = value
 
-    def creat_json_file(self):
+    def create_json_file(self):
         data = {
             'name': self.name,
             'path': self.path
@@ -133,7 +132,7 @@ class ClusterCutter(object):
         """
         z = sorted([float(i) for i in self.z])
 
-        # dlete the repeat atom with the similar z-coordinate
+        # delete the repeat atom with the similar z-coordinate
         i = 1
         while i < len(z):
             if abs(z[i] - z[i - 1]) < 0.1:
@@ -237,7 +236,7 @@ class ClusterCutter(object):
                     UnderCenter = (under_avg_x, under_avg_y)
                 else:
                     center = (avg_x, avg_y, avg_z)
-                    UpperCenter = (upper_avg_x, under_avg_y, under_avg_z)
+                    UpperCenter = (upper_avg_x, upper_avg_y, upper_avg_z)
                     UnderCenter = (under_avg_x, under_avg_y, under_avg_z)
                 return center, UpperCenter, UnderCenter
 
@@ -346,7 +345,7 @@ class ClusterCutter(object):
         new_y = atom.y + v1[1] * a1 + v2[1] * a2
         new_z = atom.z + v1[2] * a1 + v2[2] * a2
         no = atom.no
-        type = atom.type
+        atom_type = atom.type
         coor = atom.coor
         coor_vec = atom.coor_vec
         new_atom = Atom(
@@ -355,7 +354,7 @@ class ClusterCutter(object):
             new_y,
             new_z,
             no=no,
-            type=type,
+            atom_type=atom_type,
             coor=coor,
             coor_vec=coor_vec)
         new_atom.layer = atom.layer
@@ -368,7 +367,7 @@ class ClusterCutter(object):
         new_y = atom.y + v1[1] * a1 + v2[1] * a2 + v3[0] * a3
         new_z = atom.z + v1[2] * a1 + v2[2] * a2 + v3[0] * a3
         no = atom.no
-        type = atom.type
+        atom_type = atom.type
         coor = atom.coor
         coor_vec = atom.coor_vec
         new_atom = Atom(
@@ -377,7 +376,7 @@ class ClusterCutter(object):
             new_y,
             new_z,
             no=no,
-            type=type,
+            atom_type=atom_type,
             coor=coor,
             coor_vec=coor_vec)
         new_atom.layer = atom.layer
@@ -650,10 +649,10 @@ class ClusterCutter(object):
         coord, add_h = self.cutting_setting
         self.choosed_atoms = self.choose_atoms_from_distance()
         self.choosed_atoms = self.cal_coor_no_of_all_atoms(self.choosed_atoms)
-        if coord == True:
+        if coord is True:
             self.choosed_atoms = self.select_atoms_according_coordinate(self.choosed_atoms)
         self.choosed_atoms = self.delete_atoms(self.choosed_atoms)
-        if add_h == True:
+        if add_h is True:
             self.choosed_atoms = self.add_H()
         self.record_cluster()
 
@@ -732,4 +731,3 @@ class ClusterCutter(object):
             print('Geometry file generated.')
             print('number of atoms: ', len(cluster))
             print('---' * 15)
-    

@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import os
 import sys
 import math
 import configparser
@@ -31,7 +30,7 @@ class GeoIniReader(object):
         geometry = [self.cfg.get('geometry', opt) for opt in atomsOpt]
         geometry = [geo.split() for geo in geometry]
         geometry = self.add_element_geometry(geometry)
-        if self.if_fraction_transform == True:
+        if self.if_fraction_transform is True:
             geometry = self.geo_transfer_from_fraction_to_angstrom(geometry)
         return geometry
 
@@ -86,7 +85,6 @@ class GeoIniReader(object):
                 print('Please enter lattice vector with \'a=\', \'b=\' and \'c=\' in geo.ini . ')
                 sys.exit()
         return lv
-                
                 
     def geo_transfer_from_fraction_to_angstrom(self, geometry):
         """

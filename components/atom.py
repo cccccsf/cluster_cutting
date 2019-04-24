@@ -1,16 +1,17 @@
 #!/usr/bin/python3
 from components import periodic_table_rev
 
+
 class Atom(object):
 
-    def __init__(self, nat, x, y, z, no=1, type=1, coor=1, coor_vec=[]):
+    def __init__(self, nat, x, y, z, no=1, atom_type=1, coor=1, coor_vec=[]):
         self.nat = nat
         self.element = periodic_table_rev[int(nat)]
         self.x = x
         self.y = y
         self.z = z
         self.no = no
-        self.type =type
+        self.type = atom_type
         self.coor = coor
         self.coor_vec = coor_vec
         self.coor_vec_free = []
@@ -23,4 +24,4 @@ class Atom(object):
         return self.__dict__ == other.__dict__
 
     def __setitem__(self, key, value):
-        self._item[index] = value
+        self._item[key] = value

@@ -6,27 +6,31 @@ from components import ClusterCutter
 
 class FactorCalculator(ClusterCutter):
 
-
-    def __init__(self, atom, path,
+    def __init__(
+            self,
+            atom,
+            path,
             geometry_file,
             factors=[1, 1, 0.7],
             name='cluster',
             central_atoms=[],
             fixed_atoms=[],
             deleted_atoms=[],
-            cutting_setting=[]):
-        super(FactorCalculator, self).__init__(path,
+            cutting_setting=[]
+                ):
+        super(FactorCalculator, self).__init__(
+            path,
             geometry_file,
             factors,
             name,
             central_atoms,
             fixed_atoms,
             deleted_atoms,
-            cutting_setting)
+            cutting_setting
+            )
         self.atom = atom
         self.layer = self.locate_atom()
         self.center = self.get_center()
-
 
     def get_distance_to_center(self, atom=[], fraction=False):
         
@@ -44,11 +48,10 @@ class FactorCalculator(ClusterCutter):
             dis = math.sqrt((x-x0)**2 + (y-y0)**2 + (z-z0)**2)
             print('The distance between the given atom and the central point is: ', dis)
         
-        if fraction == True:
+        if fraction is True:
             return round(dis/self.l, 2)
         else:
             return dis
-
 
     def get_distance_to_vector(self, vec, fraction=False):
 
@@ -70,7 +73,7 @@ class FactorCalculator(ClusterCutter):
         if type(self.atom) == Atom:
             x, y, z = self.atom.x, self.atom.y, self.atom.z
         else:
-            x, y, z = atom
+            x, y, z = self.atom
         
         if self.dimensionality == 2:
             cx, cy = self.center
@@ -86,11 +89,10 @@ class FactorCalculator(ClusterCutter):
             proj = (ux*vx + uy*vy + uz*vz) / math.sqrt(vx**2 + vy**2 + yz**2)
             print('projection : ', proj)
         
-        if fraction == True:
+        if fraction is True:
             return abs(round(proj/l, 2))
         else:
             return abs(proj)
-
 
     def locate_atom(self):
         """

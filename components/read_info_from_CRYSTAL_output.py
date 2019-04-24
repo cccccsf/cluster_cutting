@@ -10,10 +10,10 @@ def read_info_block(out_file):
     with open(out_file, 'rb') as f:
         f.seek(s, 2)
         out = f.read().decode('utf-8')
-    #search final optimized geometry
+    # search final optimized geometry
     reg = 'FINAL OPTIMIZED GEOMETRY.*'
     block = re.search(reg, out, re.M|re.S)
-    if block != None:
+    if block is not None:
         block = block.group(0)
     else:
         print(path)
@@ -26,7 +26,7 @@ def get_dimensionality(block):
 
     reg = 'FINAL OPTIMIZED GEOMETRY.*?\n'
     dimen = re.search(reg, block, re.M|re.S)
-    if dimen != None:
+    if dimen is not None:
         dimen = dimen.group(0)
     else:
         print('Dimensionality not found...')
@@ -54,7 +54,7 @@ def get_lattice_vector(block):
 
     reg = 'DIRECT LATTICE VECTORS CARTESIAN COMPONENTS.*?\n.*?\n.*?\n.*?\n.*?\n'
     latt_vec = re.search(reg, block, re.M|re.S)
-    if latt_vec != None:
+    if latt_vec is not None:
         latt_vec = latt_vec.group(0)
     else:
         print('Lattice Vector not found...')
@@ -79,7 +79,7 @@ def get_geometry(block):
 
     reg = 'CARTESIAN COORDINATES.*?\n\n'
     geo = re.search(reg, block, re.M|re.S)
-    if geo != None:
+    if geo is not None:
         geo = geo.group(0)
     else:
         print('Geometry not found...')
@@ -87,7 +87,7 @@ def get_geometry(block):
 
     reg = '    1.*\n\n'
     geometry = re.search(reg, geo, re.M|re.S)
-    if geometry != None:
+    if geometry is not None:
         geometry = geometry.group(0)
     else:
         print('Geometry not found...')
