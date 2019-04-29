@@ -19,7 +19,7 @@ def read_info_block(out_file):
         print(path)
         print('Iinfomation not found...')
         return None
-    return  block
+    return block
 
 
 def get_dimensionality(block):

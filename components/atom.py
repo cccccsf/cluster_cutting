@@ -24,4 +24,4 @@ class Atom(object):
         return self.__dict__ == other.__dict__
 
     def __setitem__(self, key, value):
-        self._item[key] = value
+        self.__dict__[key] = value

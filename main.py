@@ -19,7 +19,7 @@ def cluster_cutting():
     Clu = ClusterCutter(
         path,
         output_file,
-        factors = cutting_factors,
+        factors=cutting_factors,
         name=name,
         central_atoms=central_atoms,
         fixed_atoms=fixed_atoms,

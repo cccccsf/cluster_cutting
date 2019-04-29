@@ -28,7 +28,7 @@ class ClusterCutter(object):
         self.geometry_file = geometry_file
         self.name = name
         self.fixed_atoms = fixed_atoms
-        self.record_file = self.creat_json_file()
+        self.record_file = self.create_json_file()
 
         self.dimensionality, self.lattice_vector, self.geometry = self.read_geometry_info()
         self.no, self.nat, self.elements, self.x, self.y, self.z = self.get_xyz()
@@ -48,7 +48,7 @@ class ClusterCutter(object):
         self.choosed_atoms = []
         
     def __setitem__(self, key, value):
-        self._item[key] = value
+        self.__dict__[key] = value
 
     def create_json_file(self):
         data = {

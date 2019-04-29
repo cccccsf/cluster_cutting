@@ -45,7 +45,8 @@ class GeoIniReader(object):
             self.if_fraction_transform = False
         return self.if_fraction_transform
 
-    def add_element_geometry(self, geometry):
+    @staticmethod
+    def add_element_geometry(geometry):
         count = 1
         for geo in geometry:
             nat = int(geo[0])
@@ -81,7 +82,8 @@ class GeoIniReader(object):
                 b = [float(b) for b in b.split()]
                 c = [float(c) for c in c.split()]
                 lv = [a, b, c]
-            except:
+            except Exception as e:
+                print(e)
                 print('Please enter lattice vector with \'a=\', \'b=\' and \'c=\' in geo.ini . ')
                 sys.exit()
         return lv

@@ -51,7 +51,7 @@ class IniReader(object):
                 output = os.path.join(self.job_path, output)
         except configparser.NoOptionError:
             print('Output file info not found in input.ini.')
-            print('Programm will choose output file automatically.')
+            print('Program will choose output file automatically.')
         return output
 
     def get_basic_info(self):
@@ -72,14 +72,16 @@ class IniReader(object):
             upper_center_atoms, under_center_atoms)
         return self.central_atoms
 
-    def split_atoms(self, atoms):
+    @staticmethod
+    def split_atoms(atoms):
         if atoms == '' or atoms is None or atoms == []:
             atoms = []
         else:
             atoms = atoms.split()
         return atoms
 
-    def process_center_atoms(self, upper_atoms, under_atoms):
+    @staticmethod
+    def process_center_atoms(upper_atoms, under_atoms):
         if upper_atoms != [] and under_atoms != []:
             atoms = [upper_atoms, under_atoms]
         elif upper_atoms == [] and under_atoms != 0:
@@ -112,7 +114,8 @@ class IniReader(object):
         self.factors = factors
         return factors
 
-    def split_factors(self, factors):
+    @staticmethod
+    def split_factors(factors):
         if factors == '' or factors == []:
             factors = []
         else:
